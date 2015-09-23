@@ -2,7 +2,7 @@ import re
 
 
 def binary(s):
-    return re.match(r'[01]', s)
+    return re.match(r'[0-9A-F]+$', s')
 
 
 def binary_even(s):
@@ -11,21 +11,20 @@ def binary_even(s):
 
 
 def hex(s):
-    return re.match(r'[^G-Z][\dA-F]+', s)
+    return re.match(r'[0-9A-F]+$', s')
 
 
 def word(s):
-    return re.match(r'^[0-9a-zA-Z-]*[a-zA-Z]$', s)
+    return re.match(r'^[\w-]*[^\d\W!*]+$', s)
 
 
-def words(s, count= None):
-     list_words = re.split('\s',s)
+def words(s, = None):
+     list_words = re.split(r'\s', s)
      if count:
         if count != len(list_words):
             return None
-        else:
-            pass
-        if None in [re.match(r'[\w/-]*[a-z]+$', w) for s in list_words]:
+
+        if None in [word(x) for x in list_words]:
             return None
         else:
             return list_words
